@@ -1,0 +1,33 @@
+
+body{
+    background-image: url("../srcIndex/image/inavers.gif");
+    color: lawngreen;
+
+}
+
+/*squares of the grid*/
+.square {
+    width: 200px;
+    height: 200px;
+    border-style: solid;
+    border-color: black;
+}
+/*Grid flex content and justify to center width and height*/
+.grid {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+    align-content: center;
+    width: 618px;
+    height: 618px;
+    background-color: cornflowerblue;
+}
+/* The mole for it just set if as background*/
+.mole {
+    background-image: url('mole.jpg');
+    background-size: cover;
+}
+/*Description*/
+.description{
+    color: yellow
+}

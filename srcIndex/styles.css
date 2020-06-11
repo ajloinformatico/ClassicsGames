@@ -1,0 +1,20 @@
+body{
+    background-image: url("image/inavers.gif");
+    color: lawngreen;
+}
+main ul{
+    list-style: none;
+}
+main ul li a{
+    color: lawngreen;
+}
+
+main ul li a:hover{
+    background-color: yellow;
+    color: red;
+    font-size: 14pt;
+}
+
+main ul div {
+    color: yellow;
+}

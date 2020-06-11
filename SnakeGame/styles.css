@@ -1,0 +1,30 @@
+body{
+    background-image: url("../srcIndex/image/inavers.gif");
+    color: lawngreen;
+}
+
+/*TODO MAKE GRID AND DIVS BIGGER X2 OR X3*/
+.grid {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-wrap: wrap;
+    border: 5px solid gray;
+    background-color: cadetblue;
+}
+.grid div{
+    width: 20px;
+    height: 20px;
+}
+.snake{
+    background-color: green;
+}
+
+.apple{
+    background-color: red;
+}
+
+
+.description{
+    color: yellow;
+}

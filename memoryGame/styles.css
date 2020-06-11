@@ -1,0 +1,14 @@
+body{
+    background-image: url("../srcIndex/image/inavers.gif");
+    color: lawngreen;
+}
+.grid {
+    display: flex;
+    flex-wrap: wrap;  /*The flex items break into multiple lines*/
+    height: 300px;
+    width: 400px;
+}
+
+.description{
+    color: yellow;
+}
