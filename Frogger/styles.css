@@ -3,8 +3,35 @@ body{
     color: lawngreen;
 }
 
+.grid{
+    border: 1px solid gray ;
+    background-color: cornflowerblue;
+    display: flex;
+    flex-wrap: wrap;
+    height: 180px;
+    width: 180px;
+}
+
+.grid div{
+    height: 20px;
+    width: 20px;
+}
 
 
+
+.ending-block { /*The last block where the frog must arrive*/
+    background-color: red;
+}
+
+
+.starting-block{ /*First block where begin our frog*/
+    background-color: blue;
+}
+
+
+.frog{ /*The block where frog begins*/
+    background-color: green;
+}
 
 
 
