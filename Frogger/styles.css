@@ -4,7 +4,7 @@ body{
 }
 
 .grid{
-    border: 1px solid gray ;
+    border: 1px solid purple;
     background-color: cornflowerblue;
     display: flex;
     flex-wrap: wrap;
@@ -32,6 +32,33 @@ body{
 .frog{ /*The block where frog begins*/
     background-color: green;
 }
+
+
+
+/*obstacles*/
+
+.c1 {
+    background-color: black;
+}
+
+.c2, .c3{
+    background-color: gray;
+}
+
+
+.l1, .l2, .l3{
+    background-color: brown;
+}
+
+.l4, .l5{
+    background-color: lightblue;
+}
+
+
+
+
+
+
 
 
 
