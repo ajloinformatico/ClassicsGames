@@ -1,3 +1,6 @@
+// TODO add function.removeListenerEvent('keyup', function) to snake and to alien invaders
+//TODO VIEW WHEN SNAKE HITS WITH WALLS DONT STOP THE GAME
+
 document.addEventListener('DOMContentLoaded', () => {
    const squares = document.querySelectorAll('.grid div');
    const scoreDisplay = document.querySelector('span');
@@ -37,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    //TODO VIEW WHY IT DONT RUN WELL
+
 
     // function for all snake results its the principal function
     function moveOutC() {

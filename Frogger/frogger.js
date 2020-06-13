@@ -1,3 +1,5 @@
+//TODO make different responses depending on whether it falls into the water, is hit by a shell or time is running out
+//TODO FUNCTIONS FOR MOVE LOGS AND CARS EVER FAIL
 document.addEventListener('DOMContentLoaded', () => {
     const squares = document.querySelectorAll('.grid div'); //All squares of the grif
     const timeLeft = document.querySelector('#time-left');
@@ -29,27 +31,26 @@ document.addEventListener('DOMContentLoaded', () => {
         if(e.keyCode === 39 || e.keyCode === 68){
             //sure that cannot moves out of the grid, hits with right wall
             if(currentIndex % width < width -1) {
-                currentIndex = 1;
+                currentIndex += 1;
             }
             // if we press up arrow or W on the keyboard frog moves to up on our grid
         }else if(e.keyCode === 38|| e.keyCode === 87){
             //sure that cannot moves out of the grid, hits with top of grid
             if(currentIndex - width >= 0) {
-                currentIndex = -width;
+                currentIndex -= width;
             }
             // if we press left arrow or A on the keyboard frog moves to left on our grid
         }else if(e.keyCode === 37 || e.keyCode === 65){
             //sure that cannot moves out of the grid, hits with left wall
             if(currentIndex % width !== 0) {
-                currentIndex = -1;
+                currentIndex -= 1;
             }
             // if we press down arrow or S on the keyboard snake moves to down on our grid
         }else if(e.keyCode === 40 || e.keyCode === 83){
             //sure that cannot moves out of the grid, hits with left wall
             if(currentIndex + width < width * width){
-                currentIndex = +width;
+                currentIndex += width;
             }
-            currentIndex = +width;
         }
         // after moves add to the new square index the frogg class
         squares[currentIndex].classList.add('frog');
@@ -82,7 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 carLeft.classList.remove('c3'); //remove before class div
                 carLeft.classList.add('c1'); // add after class div
                 break;
-
         }
     }
 
@@ -95,8 +95,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
 
             case carRight.classList.contains('c2'):
-                carLeft.classList.remove('c2'); //remove before class div
-                carLeft.classList.add('c1'); // add after class div
+                carRight.classList.remove('c2'); //remove before class div
+                carRight.classList.add('c1'); // add after class div
                 break;
 
             case carRight.classList.contains('c3'):
@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //loop through all the squares with the class logsLeft or the class logsRight and catch it into moveLog functions
     function autoMoveLogs(){
         logsLeft.forEach(logLeft => moveLogLeft(logLeft));
-        logsRight.forEach(logRight => moveLogLeft(logRight));
+        logsRight.forEach(logRight => moveLogRight(logRight));
     }
 
 
@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     //move log obstacle's to right on a time loop THE SAME THAT CARSRIGHT
-    function moveCarRight(logRight) {
+    function moveLogRight(logRight) {
         switch (true) {
             case logRight.classList.contains('l1'):
                 logRight.classList.remove('l1'); //remove before class div
@@ -185,28 +185,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (squares[4].classList.contains('frog')) {
             result.innerHTML = "Congratulations!! YOU WIN";
             squares[currentIndex].classList.remove('frog'); // delete frog class from the top
-            clearInterval(timerId);
-            document.removeEventListener('keyup', moveFrog); // TODO add to snake and to alien invaders
+            clearInterval(TimerId);
+            document.removeEventListener('keyup', moveFrog);
         }
     }
     //Condition to lose
     function lose() {
-        let finish;
         // if finish your time or if the square with the frog class hits with and obstacle square on the grid
-        if (currentTime === 0){
-            result.innerHTML("Sorry your time is up");
-            finish = 1
-        }else if(squares[currentIndex].classList.contains('c1')
-            || squares[currentIndex].classList.contains('l5')
-            || squares[currentIndex].classList.contains('l4')){
-            result.innerHTML("Sorry. frog hits with an obstacle. YOU LOSE");
-            finish = 1;
-        }
-
-        if(finish === 1){
-            //Fincally remove frog class and clear timerid
+        if (currentTime === 0 || squares[currentIndex].classList.contains('c1') || squares[currentIndex].classList.contains('l5') || squares[currentIndex].classList.contains('l4')){
+            result.innerHTML = "Sorry. You lose :(";
             squares[currentIndex].classList.remove('frog');
-            clearInterval(timerId);
+            clearInterval(TimerId);
             document.removeEventListener('keyup', moveFrog);
         }
     }
@@ -229,6 +218,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     //Run all the functions that moves pieces on the grid
+    function moveAll() {
+        currentTime --;
+        timeLeft.textContent = currentTime ;
+        autoMoveCars();
+        autoMoveLogs();
+        moveWithLogLeft();
+        moveWithLogRight();
+        lose();
+    }
 
+    //btn Start and Pause
+    start_btn.addEventListener('click', () => {
+        if(TimerId) {
+            clearInterval(TimerId);
+        }else{
+            TimerId = setInterval(moveAll, 1000); // run function moveAll every 1 seconds
+            document.addEventListener('keyup', moveFrog); //run move frog function and the keyup
+        }
+    })
 
 });

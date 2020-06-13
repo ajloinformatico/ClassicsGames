@@ -28,13 +28,6 @@ body{
     background-color: blue;
 }
 
-
-.frog{ /*The block where frog begins*/
-    background-color: green;
-}
-
-
-
 /*obstacles*/
 
 .c1 {
@@ -55,11 +48,9 @@ body{
 }
 
 
-
-
-
-
-
+.frog{ /*The block where frog begins*/
+    background-color: green;
+}
 
 
 .description{
