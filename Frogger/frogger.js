@@ -1,10 +1,10 @@
 //TODO make different responses depending on whether it falls into the water, is hit by a shell or time is running out
-//TODO FUNCTIONS FOR MOVE LOGS AND CARS EVER FAIL
 document.addEventListener('DOMContentLoaded', () => {
     const squares = document.querySelectorAll('.grid div'); //All squares of the grif
     const timeLeft = document.querySelector('#time-left');
     const result = document.querySelector('#result');
     const start_btn = document.querySelector('#button');
+    const restart_btn = document.querySelector('#restart');
     //Select squares with obstacle car class
     const carsLeft = document.querySelectorAll('.car-left');
     const carsRight = document.querySelectorAll('.car-right');
@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
         carsRight.forEach(carRight => moveCarRight(carRight));
     }
 
+
     //move cars obstacle's to left on a time loop
     function moveCarLeft(carLeft) {
         // On our div we have classes of cars on diferents divs so just remove class before div class and add after div class
@@ -116,6 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     //move log obstacle's to left on a time loop
+
     function moveLogLeft(logLeft) {
         // On our div we have classes of cars on different divs so just remove class before div class and add after div class
         switch (true) {
@@ -140,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
 
                 case logLeft.classList.contains('l5'):
-                logLeft.classList.remove('l4'); //remove before class div
+                logLeft.classList.remove('l5'); //remove before class div
                 logLeft.classList.add('l1'); // add after class div
                 break;
         }
@@ -148,6 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //move log obstacle's to right on a time loop THE SAME THAT CARSRIGHT
     function moveLogRight(logRight) {
+
         switch (true) {
             case logRight.classList.contains('l1'):
                 logRight.classList.remove('l1'); //remove before class div
@@ -195,6 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentTime === 0 || squares[currentIndex].classList.contains('c1') || squares[currentIndex].classList.contains('l5') || squares[currentIndex].classList.contains('l4')){
             result.innerHTML = "Sorry. You lose :(";
             squares[currentIndex].classList.remove('frog');
+            squares[currentIndex].classList.add('crash');
             clearInterval(TimerId);
             document.removeEventListener('keyup', moveFrog);
         }
@@ -210,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function moveWithLogRight(){
-        if(currentIndex >= 18 && currentIndex < 26){ // if currentIndex (frog) is on the possibilities position of logsRight
+        if(currentIndex >= 18 && currentIndex <= 26){ // if currentIndex (frog) is on the possibilities position of logsRight
             squares[currentIndex].classList.remove('frog');
             currentIndex -= 1; // move currentIndex to next position
             squares[currentIndex].classList.add('frog')
@@ -230,12 +234,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //btn Start and Pause
     start_btn.addEventListener('click', () => {
-        if(TimerId) {
-            clearInterval(TimerId);
-        }else{
+        if(TimerId){
+          clearInterval(TimerId);
+        }else {
             TimerId = setInterval(moveAll, 1000); // run function moveAll every 1 seconds
             document.addEventListener('keyup', moveFrog); //run move frog function and the keyup
         }
-    })
 
+    });
+
+
+    restart_btn.addEventListener('click', () =>{
+        reload();
+    });
+
+    function reload() {
+        setTimeout(location.reload(true), 5000);
+    }
 });

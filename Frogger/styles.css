@@ -1,3 +1,4 @@
+/*todo make all bigger*/
 body{
     background-image: url("../srcIndex/image/inavers.gif");
     color: lawngreen;
@@ -50,6 +51,11 @@ body{
 
 .frog{ /*The block where frog begins*/
     background-color: green;
+}
+
+
+.crash{ /*When you lose*/
+    background-color: darkorange;
 }
 
 
