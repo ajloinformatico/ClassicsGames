@@ -1,14 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const startBtn = document.querySelector('.start-tetris');
     const grid = document.querySelector('.grid');
 
-    const displaySquares = document.querySelectorAll('.previous-grid div'); //Select all divs of second display to show previous figure
+
 
 
     let squares = Array.from(grid.querySelectorAll('div')); //array formed by grid var and inside it select all the divs
-
+    let nextRandom = 0;
     const width = 10;
     const height = 20;
-    let currentPosition = 4;
+    let timerId;
 
 
 
@@ -73,6 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentRotation = 0; //Index for figure in all arrays
     let current = theFigures[random][currentRotation]; // finally catch from the random array the figure of currentRotation index
 
+    let currentPosition = 4;
     // Draw the figure
     function draw(){
         current.forEach( index => (
@@ -134,9 +136,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Show previous Figures ↓
     //
+    const displaySquares = document.querySelectorAll('.previous-grid div'); //Select all divs of second display to show previous figure
     const displayWidth = 4;
     const displayIndex = 0;
-    let nextRandom = 0;
+
     const smallFigures = [
         [1, displayWidth+1, displayWidth*2+1, 2], // lFigures
         [0, displayWidth, displayWidth+1, displayWidth*2+1], // zFigures
@@ -146,8 +149,8 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     function displayFigure(){
-        displaySquares.forEach(figure => { //on lop remove all block classes
-            figure.classList.remove('block');
+        displaySquares.forEach(square => { //on lop remove all block classes
+            square.classList.remove('block');
         });
         smallFigures[nextRandom].forEach( index => { // loop on smallFigure and catch random figure to show
            displaySquares[displayIndex + index].classList.add('block');
@@ -156,8 +159,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Frezze the figure
     function freeze() {
-        
+        if(current.some(index => squares[currentPosition + index + width].classList.contains('block3')
+        || squares[currentPosition + index + width].classList.contains('block2'))){ //if Figure is on the floor
+            current.forEach(index => squares[index + currentPosition].classList.add('block2'));
+            random = nextRandom;
+            nextRandom = theFigures[random][currentRotation];
+            currentPosition = 4;
+            draw();
+            displayFigure();
+        }
     }
+    freeze(); //TODO CHECK IF WITH THIS RUN
+    //Start the Game
+    startBtn.addEventListener('click', () => {
+       if(timerId) {
+           clearInterval(timerId);
+           timerId = null
+       } else{
+           draw();
+           timerId = setInterval(moveDown, 1000);
+           nextRandom = Math.floor(Math.random()*theFigures.length);
+           displayFigure();
+        }
+    });
 
 
 });
