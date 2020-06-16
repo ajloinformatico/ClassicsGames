@@ -169,7 +169,6 @@ document.addEventListener('DOMContentLoaded', () => {
             displayFigure();
         }
     }
-    freeze(); //TODO CHECK IF WITH THIS RUN
     //Start the Game
     startBtn.addEventListener('click', () => {
        if(timerId) {
