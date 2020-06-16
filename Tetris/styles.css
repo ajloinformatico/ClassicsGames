@@ -7,7 +7,14 @@ div {
 .grid {
     width: 200px;
     height: 400px;
-    background-color: blue;
     display: flex;
     flex-wrap: wrap;
+}
+
+.block{
+    background-color: blue;
+}
+
+.block2{
+    background-color: purple;
 }
