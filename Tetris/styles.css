@@ -4,6 +4,7 @@ div {
     width: 20px;
 }
 
+/*Principal display*/
 .grid {
     width: 200px;
     height: 400px;
@@ -11,10 +12,28 @@ div {
     flex-wrap: wrap;
 }
 
+/*Second Display*/
+.previous-grid{
+    width: 80px;
+    height: 80px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.previous-figure{
+    height: 80px;
+    width: 80px;
+}
+
+
 .block{
     background-color: blue;
 }
 
 .block2{
     background-color: purple;
+}
+
+.block3{
+    background-color: green;
 }

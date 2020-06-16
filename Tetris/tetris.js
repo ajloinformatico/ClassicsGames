@@ -1,5 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     const grid = document.querySelector('.grid');
+
+    const displaySquares = document.querySelectorAll('.previous-grid div'); //Select all divs of second display to show previous figure
+
+
     let squares = Array.from(grid.querySelectorAll('div')); //array formed by grid var and inside it select all the divs
 
     const width = 10;
@@ -88,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
         blur(); //first remove the class
         currentPosition = currentPosition += width; //add the new position to the position
         draw(); //and draw
-        //freeze(); //todo freeze function
+        freeze()
     }
 
     // Move Right the figure == moveDown but changing to right the position
@@ -127,9 +131,33 @@ document.addEventListener('DOMContentLoaded', () => {
         current = theFigures[random][currentRotation];
         draw();
     }
-    draw();
 
+    // Show previous Figures ↓
+    //
+    const displayWidth = 4;
+    const displayIndex = 0;
+    let nextRandom = 0;
+    const smallFigures = [
+        [1, displayWidth+1, displayWidth*2+1, 2], // lFigures
+        [0, displayWidth, displayWidth+1, displayWidth*2+1], // zFigures
+        [1, displayWidth, displayWidth+1, displayWidth+2], // tFigures
+        [0, 1, displayWidth, displayWidth+1], //oFigures
+        [1, displayWidth+1, displayWidth*2+1, displayWidth*3+1] //iFigures
+    ];
 
+    function displayFigure(){
+        displaySquares.forEach(figure => { //on lop remove all block classes
+            figure.classList.remove('block');
+        });
+        smallFigures[nextRandom].forEach( index => { // loop on smallFigure and catch random figure to show
+           displaySquares[displayIndex + index].classList.add('block');
+        });
+    }
+
+    //Frezze the figure
+    function freeze() {
+        
+    }
 
 
 });
