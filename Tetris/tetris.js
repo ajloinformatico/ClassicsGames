@@ -1,15 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
     const startBtn = document.querySelector('.start-tetris');
     const grid = document.querySelector('.grid');
-
-
-
-
+    const scoreDisplay = document.querySelector('.score-display');
+    const linesDisplay = document.querySelector('.lines-display');
     let squares = Array.from(grid.querySelectorAll('div')); //array formed by grid var and inside it select all the divs
-    let nextRandom = 0;
+
     const width = 10;
     const height = 20;
     let timerId;
+    let score = 0;
+    let lines = 0;
+    let currentIndex = 0;
 
 
 
@@ -133,12 +134,13 @@ document.addEventListener('DOMContentLoaded', () => {
         current = theFigures[random][currentRotation];
         draw();
     }
-
+    // todo Revisar desde aquí
     // Show previous Figures ↓
     //
     const displaySquares = document.querySelectorAll('.previous-grid div'); //Select all divs of second display to show previous figure
     const displayWidth = 4;
     const displayIndex = 0;
+    let nextRandom = 0;
 
     const smallFigures = [
         [1, displayWidth+1, displayWidth*2+1, 2], // lFigures
@@ -148,6 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
         [1, displayWidth+1, displayWidth*2+1, displayWidth*3+1] //iFigures
     ];
 
+    //Show previous figure on previous grid
     function displayFigure(){
         displaySquares.forEach(square => { //on lop remove all block classes
             square.classList.remove('block');
@@ -157,16 +160,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+
     //Frezze the figure
+    //Principal function its repeat all the time to move down cath keys add score remove lines game over..
     function freeze() {
         if(current.some(index => squares[currentPosition + index + width].classList.contains('block3')
         || squares[currentPosition + index + width].classList.contains('block2'))){ //if Figure is on the floor
             current.forEach(index => squares[index + currentPosition].classList.add('block2'));
             random = nextRandom;
-            nextRandom = theFigures[random][currentRotation];
+            nextRandom = Math.floor(Math.random()*theFigures.length); //todo common function for the nextRandom
+            current = theFigures[random][currentRotation];
             currentPosition = 4;
             draw();
             displayFigure();
+            gameOver();
+            addScore();
         }
     }
     //Start the Game
@@ -176,11 +184,49 @@ document.addEventListener('DOMContentLoaded', () => {
            timerId = null
        } else{
            draw();
-           timerId = setInterval(moveDown, 1000);
-           nextRandom = Math.floor(Math.random()*theFigures.length);
+           timerId = setInterval(moveDown, 1000); //1 second
+           nextRandom = Math.floor(Math.random()*theFigures.length); //todo common function for the nextRandom
            displayFigure();
         }
     });
+
+    // Game Over
+    // Show points an reload the game
+    function gameOver(){
+        if(current.some(index => squares[currentPosition + index].classList.contains('block2'))){//if figure is on the top
+            scoreDisplay.innerHTML = "end";
+            clearInterval(timerId);
+            alert("Game Over\n You have "+score+ " points\nyou have made " + lines + " lines ");
+            reload();
+
+        }
+    }
+
+    // function to add score and clear lines
+    function addScore() {
+        for (currentIndex = 0; currentIndex < 199; currentIndex += width) {
+            const row = [currentIndex, currentIndex + 1, currentIndex + 2, currentIndex + 3, currentIndex + 4, currentIndex + 5, // line
+                currentIndex + 6, +currentIndex + 7, currentIndex + 8, currentIndex + 9];
+
+            if (row.every(index => squares[index].classList.contains('block2'))) { //if all the line has class two (is locked)
+                score += 10;
+                lines += 1;
+                scoreDisplay.innerHTML = score;
+                linesDisplay.innerHTML = lines;
+                row.forEach(index => {
+                    squares[index].classList.remove('block2') || squares[index].classList.remove('block');
+                });
+                //splice the array
+                const squaresRemoved = squares.splice(currentIndex, width); //array with the squares removed
+                squares = squaresRemoved.concat(squares);  // concat the old array with the array removed (the classes of the two arrays)
+                squares.forEach(cell => grid.appendChild(cell)); // set the new array into the grid
+            }
+        }
+    }
+    //reload the page
+    function reload() {
+        location.reload(true);
+    }
 
 
 });
