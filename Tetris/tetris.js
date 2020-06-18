@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if(current.some(index => squares[currentPosition + index].classList.contains('block2'))){//if figure is on the top
             scoreDisplay.innerHTML = "end";
             clearInterval(timerId);
-            alert("Game Over\n You have "+score+ " points\nyou have made " + lines + " lines ");
+            alert("Game Over\nYou have "+score+ " points\nYou have made " + lines + " lines ");
             reload();
 
         }
