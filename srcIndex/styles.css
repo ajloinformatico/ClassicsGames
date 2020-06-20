@@ -1,20 +1,56 @@
 body{
     background-image: url("image/inavers.gif");
     color: lawngreen;
+    font-family: "Bauhaus 93";
 }
-main ul{
-    list-style: none;
-}
-main ul li a{
+.content a{
     color: lawngreen;
 }
 
-main ul li a:hover{
+.content a:hover{
     background-color: yellow;
     color: red;
     font-size: 14pt;
 }
 
-main ul div {
+.content p{
     color: yellow;
+    text-align: justify;
+}
+.content{
+    height: 100%;
+}
+/*format for div*/
+.content div{
+    padding-top: 1.5%;
+    padding-right: 20%;
+    padding-left: 1%;
+    margin-bottom: 5%;
+
+}
+
+/*format fot images*/
+.content img {
+    float: left;
+    width: 100px;
+    height: 90px;
+    margin-top: 1%;
+    margin-right: 2%;
+    margin-bottom: 1%;
+
+    /*Border Effect*/
+    border-style: solid;
+    border-color: #ffd200;
+    border-bottom-width: 4px;
+    border-top-width: 4px;
+    border-left-width: 7px;
+    border-right-width: 7px;
+    border-radius: 4px;
+
+    /* SECCOND OPTION FOR BORDER
+    border-style: inset;
+    border-width: 7px;
+    border-color: #ffd200;
+    */
+
 }
