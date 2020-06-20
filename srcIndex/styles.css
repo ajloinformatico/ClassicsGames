@@ -17,9 +17,6 @@ body{
     color: yellow;
     text-align: justify;
 }
-.content{
-    height: 100%;
-}
 /*format for div*/
 .content div{
     padding-top: 1.5%;
