@@ -2,20 +2,23 @@ body{
     background-image: url("image/inavers.gif");
     color: lawngreen;
     font-family: "Bauhaus 93";
+
 }
 .content a{
     color: lawngreen;
+    font-size: 16pt;
 }
 
 .content a:hover{
     background-color: yellow;
     color: red;
-    font-size: 14pt;
+    font-size: 19pt;
 }
 
 .content p{
     color: yellow;
     text-align: justify;
+    font-size: 14pt;
 }
 /*format for div*/
 .content div{
