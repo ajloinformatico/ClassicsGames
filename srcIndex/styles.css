@@ -2,9 +2,31 @@ body{
     background-image: url("image/inavers.gif");
     color: lawngreen;
     font-family: "Bauhaus 93", serif;
+    width: 100%;
 
 }
+
+header{
+    text-align: center;
+}
+
+/*Format for the content of the main*/
+.content{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/*Format for the divs of the content*/
+.content div {
+    width: 45%;
+    padding-top: 1.5%;
+    padding-right: 1%;
+    padding-left: 1%;
+    margin-bottom: 5%;
+}
+
 .content a{
+    text-decoration: none;
     color: lawngreen;
     font-size: 17pt;
 }
@@ -19,14 +41,6 @@ body{
     color: yellow;
     text-align: justify;
     font-size: 14pt;
-}
-/*format for div*/
-.content div{
-    padding-top: 1.5%;
-    padding-right: 1%;
-    padding-left: 1%;
-    margin-bottom: 5%;
-
 }
 
 /*format fot images*/
@@ -52,5 +66,40 @@ body{
     border-width: 7px;
     border-color: #ffd200;
     */
+}
+
+
+.pie{
+    width: 100%;
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding-bottom: .4%;
+    padding-top: .5%;
+}
+.pie a{
+    text-decoration: none;
+    color: lawngreen;
+}
+.pie a:hover{
+    background-color: yellow;
+    color: red;
+}
+
+/*standard Smartphone tansformation*/
+@media only screen and (max-width: 736px){
+
+    body{
+        width: 100%;
+    }
+    .content{
+        width: 90%;
+    }
+    .content div{
+        width: 100%;
+        
+    }
 
 }
+
+
