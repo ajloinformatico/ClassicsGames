@@ -2,8 +2,28 @@
 body{
     background-image: url("../srcIndex/image/inavers.gif");
     color: lawngreen;
+    font-family: "Bauhaus 93", serif;
+    width: 100%;
 
 }
+
+
+/*Style of header*/
+header{
+    text-align: center;
+}
+
+
+/*Content of the display game*/
+/*todo colocar contenido en el centro y poner descripción de los controles*/
+#game{
+    display: flex;
+    align-items: center;
+    margin-right: 20%;
+    margin-left: 20%;
+
+}
+
 .grid{
     border: 5px solid darkblue;
     display: flex;
@@ -31,4 +51,29 @@ body{
 /*Class for desciption*/
 .description {
     color: yellow;
+}
+
+/*Class for the footer*/
+footer{
+    width: 100%;
+    position: relative; /*fixed ever   absolute*/
+    bottom: 0;
+
+
+    background-color: black;
+    color: white;
+    text-align: center;
+
+    margin-top: 5%;
+    padding-bottom: .4%;
+    padding-top: .5%;
+
+}
+footer a{
+    text-decoration: none;
+    color: lawngreen;
+}
+footer a:hover{
+    background-color: yellow;
+    color: red;
 }
