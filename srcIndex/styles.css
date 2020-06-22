@@ -71,11 +71,18 @@ header{
 
 .pie{
     width: 100%;
+    position: relative; /*fixed ever   absolute*/
+    bottom: 0;
+
+
     background-color: black;
     color: white;
     text-align: center;
+
+    margin-top: 5%;
     padding-bottom: .4%;
     padding-top: .5%;
+
 }
 .pie a{
     text-decoration: none;
